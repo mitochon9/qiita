@@ -11,7 +11,7 @@ private: false
 
 # 完成物
 
-![完成物 gif](./image/pokegacha.gif)
+![完成物 gif](image/pokegacha.gif)
 
 URL : https://poke-gacha-ver-2-0.vercel.app
 GitHub : [https://github.com/mitochon9/poke-gacha-ver.2.0](https://github.com/mitochon9/poke-gacha-ver.2.0)
@@ -32,7 +32,7 @@ Next.js で API を叩いて何か作りたいなーと思っていたところ�
 - ポケモン図鑑は十字キーを押すことで画面スクロールできる
 - 画面遷移図のルート以外での意図しない動作をしない
 
-![仕様図](./image/specification.png)
+![仕様図](image/specification.png)
 
 素材画像は[ひこちゃんず！](http://hikochans.com/)から使用させていただきました。
 
@@ -44,7 +44,7 @@ Next.js で API を叩いて何か作りたいなーと思っていたところ�
 
 # 見た目部分の実装
 
-![外観](./image/exterior.png)
+![外観](image/exterior.png)
 
 こだわった部分を抜粋して紹介します！
 
@@ -54,7 +54,7 @@ Next.js で API を叩いて何か作りたいなーと思っていたところ�
 
 ### フォント
 
-![ディスプレイ部分の画像](./image/display.png)
+![ディスプレイ部分の画像](image/display.png)
 
 [Google Fonts](https://fonts.google.com/) で [DotGothic16](https://fonts.google.com/specimen/DotGothic16?query=dotgothic) といったフォントを採用しました。
 
@@ -92,7 +92,7 @@ module.exports = {
 
 ### GAMEBOY COLOR のロゴ部分
 
-![ゲームボーイロゴ](./image/gameboyLogo.png)
+![ゲームボーイロゴ](image/gameboyLogo.png)
 
 色んな人に「画像だと思った！」と言われた部分です。
 
@@ -121,7 +121,7 @@ export const DisplayLogo = () => (
 
 ### ゲームボーイ右下のスピーカー部分
 
-![スピーカー部分](./image/speaker.png)
+![スピーカー部分](image/speaker.png)
 
 こんな細かい部分いっか…と最初は思っていたのですが、やるんならしっかりやるか！と作りました。
 
@@ -190,7 +190,7 @@ export const Speaker = () => {
 
 ### モンスターボールのアニメーション
 
-![ガチャアニメーション](./image/gacha.gif)
+![ガチャアニメーション](image/gacha.gif)
 
 CSS アニメーションで作りました。
 
@@ -243,7 +243,7 @@ CSS アニメーションで作りました。
 
 ### ガチャ結果画面
 
-![ガチャ結果画面](./image/result.png)
+![ガチャ結果画面](image/result.png)
 
 ポケモン図鑑はなるべく本家に近づけるように作りました！
 
@@ -273,7 +273,7 @@ grid で実装するとコード量が減って構造が把握しやすいのも
 </div>
 ```
 
-![grid の説明](./image/gridExplanation.png)
+![grid の説明](image/gridExplanation.png)
 
 真ん中の線の上の “□” は空文字の配列を map() 関数で並べて position: absolute で位置調節しました！
 
@@ -348,7 +348,7 @@ B ボタン・ Select ボタン・Start ボタンの機能は boolean の切り�
 
 削除確認画面、削除完了画面、それ以外と状態によって機能を切り替えています。
 
-![A ボタンの使用済](./image/A_buttonSpecification.png)
+![A ボタンの使用済](image/A_buttonSpecification.png)
 
 ```tsx
 const handlePressA = useCallback(() => {
@@ -371,7 +371,7 @@ const handlePressA = useCallback(() => {
 
 ## ガチャ機能
 
-![ガチャ機能仕様図](./image/gachaSpecification.png)
+![ガチャ機能仕様図](image/gachaSpecification.png)
 
 ### アニメーション
 
@@ -542,7 +542,7 @@ localStorage に関しては下記を参考にさせていただきました。
 
 ## ポケモン図鑑機能
 
-![ポケモン図鑑機能仕様図](./image/pokedexSpecification.png)
+![ポケモン図鑑機能仕様図](image/pokedexSpecification.png)
 
 ### localStorage に保存したデータを取得して表示
 
@@ -640,7 +640,7 @@ useEffect(() => {
 
 ## 図鑑データ削除機能
 
-![図鑑データ削除機能仕様図](./image/pokedexDeleteSpecification.png)
+![図鑑データ削除機能仕様図](image/pokedexDeleteSpecification.png)
 
 localStorage に保存したデータは永久に消えないということで削除機能もしっかり実装しました。
 
@@ -683,7 +683,7 @@ const handlePressA = useCallback(() => {
 
 十字キーの左右ボタンに特に機能が割り当てられていなかったのでカラーチェンジ機能をつけました。
 
-![カラーチェンジ機能](./image/colorChange.gif)
+![カラーチェンジ機能](image/colorChange.gif)
 
 ```tsx
 // CrossKey.tsx
