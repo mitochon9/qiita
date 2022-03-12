@@ -1,5 +1,5 @@
 <!--
-title:   懐かしさ全開の初代ポケモンガチャアプリを Next.js で作ってみた
+title:   懐かしさ全開の初代ポケモンガチャアプリをNext.jsで作ってみた
 tags:    React,next.js,pokemon,tailwindcss,ポケモン
 id:      bbb06be7014896fde7ad
 private: false
