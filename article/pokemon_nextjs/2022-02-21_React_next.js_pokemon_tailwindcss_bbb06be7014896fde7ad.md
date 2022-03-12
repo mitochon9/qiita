@@ -66,7 +66,6 @@ Tailwind CSS でのフォントの設定は下記のようにすればできま�
 // tailwind.config.js
 
 module.exports = {
-  ...
   theme: {
     extend: {
       fontFamily: {
@@ -75,7 +74,6 @@ module.exports = {
       },
     },
   },
-  ...
 };
 ```
 
@@ -86,8 +84,6 @@ module.exports = {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-...
 ```
 
 ### GAMEBOY COLOR のロゴ部分
@@ -305,23 +301,21 @@ props のバケツリレーにならないように [recoil](https://recoiljs.or
 ```tsx
 // Display.tsx
 
-...
-
-{isAnimation ? (
-  <MonsterBallAnimation />
-) : isPokedex ? (
-  <Pokedex />
-) : isResultDisplay ? (
-  <ResultDisplay />
-) : isDeletionConfirmation ? (
-  <DeletionConfirmation />
-) : isDeletionCompleted ? (
-  <DeletionCompleted />
-) : (
-  <TopDisplay />
-)}
-
-...
+{
+  isAnimation ? (
+    <MonsterBallAnimation />
+  ) : isPokedex ? (
+    <Pokedex />
+  ) : isResultDisplay ? (
+    <ResultDisplay />
+  ) : isDeletionConfirmation ? (
+    <DeletionConfirmation />
+  ) : isDeletionCompleted ? (
+    <DeletionCompleted />
+  ) : (
+    <TopDisplay />
+  );
+}
 ```
 
 ## ボタンクリック時の挙動
@@ -352,21 +346,18 @@ B ボタン・ Select ボタン・Start ボタンの機能は boolean の切り�
 
 ```tsx
 const handlePressA = useCallback(() => {
-    if (isDeletionConfirmation) {
-      // localStorage のデータ削除の処理
-			...
-      return;
-    }
+  if (isDeletionConfirmation) {
+    // localStorage のデータ削除の処理
+    return;
+  }
 
-    if (isDeletionCompleted) {
-      // 「削除しました」のレスポンスとしての挙動。トップ画面へ遷移する
-			...
-      return;
-    }
+  if (isDeletionCompleted) {
+    // 「削除しました」のレスポンスとしての挙動。トップ画面へ遷移する
+    return;
+  }
 
-    // isDeletionConfirmation , isDeletionConfirmation のどちらでもない場合に、モンスターボールのアニメーション画面へ遷移する
-	    ...
-	  }, [...]);
+  // isDeletionConfirmation , isDeletionConfirmation のどちらでもない場合に、モンスターボールのアニメーション画面へ遷移する
+}, [ .. ]);
 ```
 
 ## ガチャ機能
@@ -389,7 +380,6 @@ Math.random() 部分の書き方は MDN で[2 つの値の間のランダムな�
 
 ```tsx
 const handlePressA = useCallback(() => {
-	...
 
 	// モンスターボールのアニメーション画面へ遷移
 	setIsAnimation(true);
@@ -470,7 +460,6 @@ const { data, error, isLoading }: any = usePokeApi(pokemonId);
 
 const pokeImg = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
 
-...
 
 // モンスターボールのアニメーションが終わってもデータ取得ができていない場合にモンスターボールの画像を表示する
   if (isLoading || isJapaneseDataLoading) {
@@ -553,14 +542,13 @@ export const Pokedex = () => {
 const storageData = localStorage.getItem("storageData");
 const parsedStorageData: PokemonData = storageData ? JSON.parse(storageData) : [];
 
-...
 
 <div>
 	{parsedStorageData?.length === 0 ? (
 	  <div></div>
   ) : (
     parsedStorageData?.map((data, index) => (
-		...
+
 ```
 
 ### 十字キーでのポケモン図鑑スクロール
@@ -571,7 +559,6 @@ const parsedStorageData: PokemonData = storageData ? JSON.parse(storageData) : [
 
    ```tsx
    // CrossKey.tsx
-   ...
 
    const [displayHeight, setDisplayHeight] = useState(0);
    const storageDataLength = useRecoilValue(storageDataLengthState);
@@ -581,38 +568,33 @@ const parsedStorageData: PokemonData = storageData ? JSON.parse(storageData) : [
    const calcDisplayHeight = 16 + storageDataLength _ 216 - 240;
    setDisplayHeight(calcDisplayHeight < 0 ? 0 : calcDisplayHeight);
    }, [storageDataLength]);
-
-   ...
    ```
 
 2. スクロールアップ、スクロールダウンの機能
 
    ```tsx
    // CrossKey.tsx
-   ...
 
    const isPokedex = useRecoilValue(isPokedexState);
    const [scrollY, setScrollY] = useRecoilState(scrollYState);
 
    const scrollUp = useCallback(() => {
-   // マイナスの数値になったら 0 をセット
-   if (scrollY - 40 <= 0 || !isPokedex) {
-   setScrollY(0);
-   return;
-   }
-   setScrollY(scrollY - 40);
+     // マイナスの数値になったら 0 をセット
+     if (scrollY - 40 <= 0 || !isPokedex) {
+       setScrollY(0);
+       return;
+     }
+     setScrollY(scrollY - 40);
    }, [isPokedex, scrollY, setScrollY]);
 
    const scrollDown = useCallback(() => {
-   // 要素の高さ以上にならないようにする
-   if (scrollY + 40 >= displayHeight) {
-   setScrollY(displayHeight);
-   return;
-   }
-   setScrollY(scrollY + 40);
+     // 要素の高さ以上にならないようにする
+     if (scrollY + 40 >= displayHeight) {
+       setScrollY(displayHeight);
+       return;
+     }
+     setScrollY(scrollY + 40);
    }, [displayHeight, scrollY, setScrollY]);
-
-   ...
    ```
 
    再度ポケモン図鑑を開いたときに中途半端な位置にスクロールがセットされていないように、ポケモン図鑑画面以外の画面では scrollY に 0 をセットするようにします。
@@ -623,7 +605,6 @@ const parsedStorageData: PokemonData = storageData ? JSON.parse(storageData) : [
 
 ```tsx
 // Pokedex.tsx
-...
 
 const ref: LegacyRef<HTMLDivElement> | undefined = useRef(null);
 
@@ -635,7 +616,6 @@ useEffect(() => {
 
   return (
     <div ref={ref} className="overflow-auto w-auto h-60">
-...
 ```
 
 ## 図鑑データ削除機能
@@ -660,7 +640,6 @@ const handlePressA = useCallback(() => {
       setIsDeletionCompleted(false);
       return;
     }
-		...
 ```
 
 ## ボタンクリック時の意図しない動作を防ぐ
