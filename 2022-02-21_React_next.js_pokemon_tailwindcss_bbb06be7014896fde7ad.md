@@ -556,45 +556,45 @@ const parsedStorageData: PokemonData = storageData ? JSON.parse(storageData) : [
 
 1. ポケモン図鑑のデータ数によって要素の高さをセット
 
-   `tsx
-   // CrossKey.tsx
+```tsx
+ // CrossKey.tsx
 
-   const [displayHeight, setDisplayHeight] = useState(0);
-   const storageDataLength = useRecoilValue(storageDataLengthState);
+ const [displayHeight, setDisplayHeight] = useState(0);
+ const storageDataLength = useRecoilValue(storageDataLengthState);
 
-   useEffect(() => {
-   // 見出しの高さ + 配列の数 _ 要素一つあたりの高さ - 画面の高さ
-   const calcDisplayHeight = 16 + storageDataLength _ 216 - 240;
-   setDisplayHeight(calcDisplayHeight < 0 ? 0 : calcDisplayHeight);
-   }, [storageDataLength]);
-   `
+ useEffect(() => {
+ // 見出しの高さ + 配列の数 _ 要素一つあたりの高さ - 画面の高さ
+ const calcDisplayHeight = 16 + storageDataLength _ 216 - 240;
+ setDisplayHeight(calcDisplayHeight < 0 ? 0 : calcDisplayHeight);
+ }, [storageDataLength]);
+```
 
 2. スクロールアップ、スクロールダウンの機能
 
-   `tsx
+   ```tsx
    // CrossKey.tsx
 
    const isPokedex = useRecoilValue(isPokedexState);
    const [scrollY, setScrollY] = useRecoilState(scrollYState);
 
    const scrollUp = useCallback(() => {
-   // マイナスの数値になったら 0 をセット
-   if (scrollY - 40 <= 0 || !isPokedex) {
-   setScrollY(0);
-   return;
-   }
-   setScrollY(scrollY - 40);
+     // マイナスの数値になったら 0 をセット
+     if (scrollY - 40 <= 0 || !isPokedex) {
+       setScrollY(0);
+       return;
+     }
+     setScrollY(scrollY - 40);
    }, [isPokedex, scrollY, setScrollY]);
 
    const scrollDown = useCallback(() => {
-   // 要素の高さ以上にならないようにする
-   if (scrollY + 40 >= displayHeight) {
-   setScrollY(displayHeight);
-   return;
-   }
-   setScrollY(scrollY + 40);
+     // 要素の高さ以上にならないようにする
+     if (scrollY + 40 >= displayHeight) {
+       setScrollY(displayHeight);
+       return;
+     }
+     setScrollY(scrollY + 40);
    }, [displayHeight, scrollY, setScrollY]);
-   `
+   ```
 
    再度ポケモン図鑑を開いたときに中途半端な位置にスクロールがセットされていないように、ポケモン図鑑画面以外の画面では scrollY に 0 をセットするようにします。
 
