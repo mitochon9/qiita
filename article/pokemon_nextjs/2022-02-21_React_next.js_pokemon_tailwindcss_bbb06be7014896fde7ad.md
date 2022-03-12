@@ -4,7 +4,6 @@ tags:    React,next.js,pokemon,tailwindcss,ポケモン
 id:      bbb06be7014896fde7ad
 private: false
 -->
-
 20 代後半から 40 代ぐらいの人は心がホカホカすること間違いなしです！
 
 ゲームボーイの UI でポケモンをガチャガチャしたり、ポケモン図鑑機能があったりするアプリを作りました！
@@ -556,7 +555,7 @@ const parsedStorageData: PokemonData = storageData ? JSON.parse(storageData) : [
 
 1. ポケモン図鑑のデータ数によって要素の高さをセット
 
-   ```tsx
+   `tsx
    // CrossKey.tsx
 
    const [displayHeight, setDisplayHeight] = useState(0);
@@ -567,11 +566,11 @@ const parsedStorageData: PokemonData = storageData ? JSON.parse(storageData) : [
    const calcDisplayHeight = 16 + storageDataLength _ 216 - 240;
    setDisplayHeight(calcDisplayHeight < 0 ? 0 : calcDisplayHeight);
    }, [storageDataLength]);
-   ```
+   `
 
 2. スクロールアップ、スクロールダウンの機能
 
-   ```tsx
+   `tsx
    // CrossKey.tsx
 
    const isPokedex = useRecoilValue(isPokedexState);
@@ -594,7 +593,7 @@ const parsedStorageData: PokemonData = storageData ? JSON.parse(storageData) : [
      }
      setScrollY(scrollY + 40);
    }, [displayHeight, scrollY, setScrollY]);
-   ```
+   `
 
    再度ポケモン図鑑を開いたときに中途半端な位置にスクロールがセットされていないように、ポケモン図鑑画面以外の画面では scrollY に 0 をセットするようにします。
 
