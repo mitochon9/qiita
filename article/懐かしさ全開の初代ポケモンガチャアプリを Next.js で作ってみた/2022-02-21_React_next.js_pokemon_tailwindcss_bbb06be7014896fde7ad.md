@@ -4,21 +4,23 @@ tags:    React,next.js,pokemon,tailwindcss,ポケモン
 id:      bbb06be7014896fde7ad
 private: false
 -->
-20代後半から40代ぐらいの人は心がホカホカすること請け合いです！
+
+20 代後半から 40 代ぐらいの人は心がホカホカすること間違いなしです！
 
 ゲームボーイの UI でポケモンをガチャガチャしたり、ポケモン図鑑機能があったりするアプリを作りました！
 
 # 完成物
 
-![pokegacha.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1686114/84cdda86-8990-6edd-8a74-8091c728907a.gif)
+![完成物 gif](./image/pokegacha.gif)
 
 URL : https://poke-gacha-ver-2-0.vercel.app
 GitHub : [https://github.com/mitochon9/poke-gacha-ver.2.0](https://github.com/mitochon9/poke-gacha-ver.2.0)
 
 # 作った経緯
+
 Next.js で API を叩いて何か作りたいなーと思っていたところ、 [PokeAPI](https://pokeapi.co/) なんてものがあるよ！って聞いて作りました。
 
-1回目の制作はディスプレイ部分だけで、なおかつバグだらけだったのですが、色々学習・開発して今ならもっとうまく作れるんじゃないかとカムバック制作しました。
+1 回目の制作はディスプレイ部分だけで、なおかつバグだらけだったのですが、色々学習・開発して今ならもっとうまく作れるんじゃないかとカムバック制作しました。
 
 # 仕様・画面遷移図
 
@@ -30,7 +32,7 @@ Next.js で API を叩いて何か作りたいなーと思っていたところ�
 - ポケモン図鑑は十字キーを押すことで画面スクロールできる
 - 画面遷移図のルート以外での意図しない動作をしない
 
-![ポケガチャ.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1686114/8a2ad7f1-a886-5858-72ef-c18dd2316a3a.png)
+![仕様図](./image/specification.png)
 
 素材画像は[ひこちゃんず！](http://hikochans.com/)から使用させていただきました。
 
@@ -42,7 +44,7 @@ Next.js で API を叩いて何か作りたいなーと思っていたところ�
 
 # 見た目部分の実装
 
-![スクリーンショット 2022-02-23 1.32.46.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1686114/28369124-0d98-487e-0e89-9d31869ecf6c.png)
+![外観](./image/exterior.png)
 
 こだわった部分を抜粋して紹介します！
 
@@ -52,7 +54,7 @@ Next.js で API を叩いて何か作りたいなーと思っていたところ�
 
 ### フォント
 
-![スクリーンショット 2022-02-20 12.19.37.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1686114/cc7f3e24-b664-cdf6-79af-6eddeaf3a9aa.png)
+![ディスプレイ部分の画像](./image/display.png)
 
 [Google Fonts](https://fonts.google.com/) で [DotGothic16](https://fonts.google.com/specimen/DotGothic16?query=dotgothic) といったフォントを採用しました。
 
@@ -60,7 +62,8 @@ Next.js で API を叩いて何か作りたいなーと思っていたところ�
 
 Tailwind CSS でのフォントの設定は下記のようにすればできます。
 
-```tailwind.config.js
+```js
+// tailwind.config.js
 
 module.exports = {
   ...
@@ -76,8 +79,7 @@ module.exports = {
 };
 ```
 
-```globals.css
-
+```css
 @import url("https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
 
@@ -90,7 +92,7 @@ module.exports = {
 
 ### GAMEBOY COLOR のロゴ部分
 
-![スクリーンショット 2022-02-20 12.23.09.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1686114/951a73bc-110e-b0fa-4a8b-abb1757614e8.png)
+![ゲームボーイロゴ](./image/gameboyLogo.png)
 
 色んな人に「画像だと思った！」と言われた部分です。
 
@@ -101,7 +103,7 @@ GAME BOY の部分は italic でそれっぽくしています。
 COLOR の部分は [Kalam](https://fonts.google.com/specimen/Kalam?query=Kalam) といったフォントを採用しました。
 
 ```tsx
-//DisplayLogo.tsx
+// DisplayLogo.tsx
 
 export const DisplayLogo = () => (
   <div className="flex relative z-10 justify-center -mt-11 text-2xl italic font-bold text-gray-200">
@@ -119,17 +121,17 @@ export const DisplayLogo = () => (
 
 ### ゲームボーイ右下のスピーカー部分
 
-![スクリーンショット 2022-02-20 12.23.39.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1686114/cf7daf15-b4be-b7cb-b3e0-9f44dac81297.png)
+![スピーカー部分](./image/speaker.png)
 
 こんな細かい部分いっか…と最初は思っていたのですが、やるんならしっかりやるか！と作りました。
 
-最初は60個の空文字配列を手書きで作っていたのですが、効率的じゃないな…と感じて変更しました。
+最初は 60 個の空文字配列を手書きで作っていたのですが、効率的じゃないな…と感じて変更しました。
 
-画面表示時に for 文で60個の空文字配列 → [ ’’ , ’’ , ’’ , ... ] を作り map() 関数で並べています。
+画面表示時に for 文で 60 個の空文字配列 → [ ’’ , ’’ , ’’ , ... ] を作り map() 関数で並べています。
 
 **追記**
 
-for 文で60個の配列を作っていましたが、 Array.from() メソッドで簡単に作れました。
+for 文で 60 個の配列を作っていましたが、 Array.from() メソッドで簡単に作れました。
 
 ```tsx
 // Speaker.tsx
@@ -140,23 +142,25 @@ export const Speaker = () => {
   const [volumeHole, setVolumeHole] = useState<string[]>([]);
 
   // 60個の空文字の配列を作る
-	 const volumeHole = Array.from({ length: 60 }, (_, i) => {
-	   return {
-	     id: i,
+
+  // 削除
+  // const createVolumeHole = useCallback(() => {
+  //   for (let index = 0; index < 60; index++) {
+  //     setVolumeHole((volumeHole) => [...volumeHole, ""]);
+  //   }
+  // }, []);
+
+  // 画面表示時に空文字の配列を作る関数を実行;
+  // useEffect(() => {
+  //   createVolumeHole();
+  // }, []);
+
+  const volumeHole = Array.from({ length: 60 }, (_, i) => {
+    return {
+      id: i,
       value: "",
     };
   });
-
-//  const createVolumeHole = useCallback(() => {
-//    for (let index = 0; index < 60; index++) {
-//      setVolumeHole((volumeHole) => [...volumeHole, ""]);
-//    }
-//  }, []);
-
-  // 画面表示時に空文字の配列を作る関数を実行
-//  useEffect(() => {
-//    createVolumeHole();
-//  }, []);
 
   return (
     <div className="absolute right-3 -bottom-2 -rotate-12">
@@ -186,14 +190,13 @@ export const Speaker = () => {
 
 ### モンスターボールのアニメーション
 
-![D2E03895-ADB3-42C6-BFE6-A1B8A4717985.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1686114/758d95e6-25b0-e470-2e20-69fb84d8199c.gif)
+![ガチャアニメーション](./image/gacha.gif)
 
 CSS アニメーションで作りました。
 
 あまり CSS アニメーションに慣れていなかったので地道に設定していきましたが、動きを想像して作れる人はすごいですね…。
 
-```globals.css
-
+```css
 .ball-animation {
   animation: shake 2s linear;
 }
@@ -240,7 +243,7 @@ CSS アニメーションで作りました。
 
 ### ガチャ結果画面
 
-![スクリーンショット 2022-02-20 12.42.43.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1686114/571fb1dc-5f5e-cdc8-dee8-bcacd4848f0a.png)
+![ガチャ結果画面](./image/result.png)
 
 ポケモン図鑑はなるべく本家に近づけるように作りました！
 
@@ -260,40 +263,34 @@ grid で実装するとコード量が減って構造が把握しやすいのも
 
 ```tsx
 <div className="grid grid-cols-7">
-  <div className="col-span-3">
-    画像
-  </div>
+  <div className="col-span-3">画像</div>
 
-  <div className="col-span-4">
-	データ
-  </div>
+  <div className="col-span-4">データ</div>
 
-  <div className="col-span-7">
-	区切り線
-  </div>
+  <div className="col-span-7">区切り線</div>
 
-  <div className="col-span-7">
-    説明文
-  </div>
+  <div className="col-span-7">説明文</div>
 </div>
 ```
 
-![ポケガチャ (1).png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1686114/055abfbc-feb2-6b34-37b8-917684e05ef2.png)
+![grid の説明](./image/gridExplanation.png)
 
 真ん中の線の上の “□” は空文字の配列を map() 関数で並べて position: absolute で位置調節しました！
 
 ```tsx
 <div className="relative col-span-7 mt-2 w-full border-2 border-gray-600">
-	<div className="flex absolute top-[-7px] col-span-7 justify-around w-full">
-		{["", "", "", "", "", "", "", "", ""].map((item, index) => (
-			<div
-				key={index}
-				className={`z-10 w-[14px] h-[14px]  ${index === 4 ? "" : "bg-amber-50 border border-gray-700"} `}
-			>
-				{item}
-			</div>
-		))}
-	</div>
+  <div className="flex absolute top-[-7px] col-span-7 justify-around w-full">
+    {["", "", "", "", "", "", "", "", ""].map((item, index) => (
+      <div
+        key={index}
+        className={`z-10 w-[14px] h-[14px]  ${
+          index === 4 ? "" : "bg-amber-50 border border-gray-700"
+        } `}
+      >
+        {item}
+      </div>
+    ))}
+  </div>
 </div>
 ```
 
@@ -332,16 +329,16 @@ props のバケツリレーにならないように [recoil](https://recoiljs.or
 ゲームボーイのボタンごとに機能を持たせています
 
 - A ボタン
-    - ガチャ実行画面へ遷移
-    - 図鑑削除決定
+  - ガチャ実行画面へ遷移
+  - 図鑑削除決定
 - B ボタン
-    - キャンセル・画面バック
+  - キャンセル・画面バック
 - Select ボタン
-    - ポケモン図鑑へ遷移
+  - ポケモン図鑑へ遷移
 - Start ボタン
-    - 削除確認画面へ遷移
+  - 削除確認画面へ遷移
 - 十字キー上下
-    - ポケモン図鑑でのディスプレイ上下スクロール
+  - ポケモン図鑑でのディスプレイ上下スクロール
 
 B ボタン・ Select ボタン・Start ボタンの機能は boolean の切り替えです。
 
@@ -351,7 +348,7 @@ B ボタン・ Select ボタン・Start ボタンの機能は boolean の切り�
 
 削除確認画面、削除完了画面、それ以外と状態によって機能を切り替えています。
 
-![ポケガチャ (2).png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1686114/20d77d8a-14e6-6e64-fecd-9e6e8924ccfd.png)
+![A ボタンの使用済](./image/A_buttonSpecification.png)
 
 ```tsx
 const handlePressA = useCallback(() => {
@@ -374,13 +371,13 @@ const handlePressA = useCallback(() => {
 
 ## ガチャ機能
 
-![ポケガチャ (3).png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1686114/4f9b0192-af79-b9b9-92bb-60d3393ec284.png)
+![ガチャ機能仕様図](./image/gachaSpecification.png)
 
 ### アニメーション
 
 A ボタンクリック後、
 
-1〜151 の数値抽選 + 2秒間のアニメーション（ isAnimation === true ）
+1〜151 の数値抽選 + 2 秒間のアニメーション（ isAnimation === true ）
 
 ↓
 
@@ -388,7 +385,7 @@ setTimeout() でアニメーション後、結果を表示（ isAnimation === fa
 
 といった流れで実装しています。
 
-Math.random() 部分の書き方は MDN で[2つの値の間のランダムな整数を得る](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Math/random#getting_a_random_integer_between_two_values)を参考にしました。
+Math.random() 部分の書き方は MDN で[2 つの値の間のランダムな整数を得る](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Math/random#getting_a_random_integer_between_two_values)を参考にしました。
 
 ```tsx
 const handlePressA = useCallback(() => {
@@ -412,7 +409,7 @@ const handlePressA = useCallback(() => {
 
 抽選で選ばれた数値を受け取ってデータを返すカスタムフックを [SWR](https://swr.vercel.app/ja) で作成しました。
 
-PokeAPI では英語と日本語でそれぞれ API の URL が違ったので2つ分作りました。
+PokeAPI では英語と日本語でそれぞれ API の URL が違ったので 2 つ分作りました。
 
 ```tsx
 // usePokeApi.tsx
@@ -504,46 +501,48 @@ const storageData = localStorage.getItem("storageData");
 // JSON 形式に変換
 const parsedStorageData = storageData ? JSON.parse(storageData) : [];
 
-const [pokemonData, setPokemonData] = useState(parsedStorageData ? parsedStorageData : []);
+const [pokemonData, setPokemonData] = useState(
+  parsedStorageData ? parsedStorageData : []
+);
 
 const setFields = useCallback(() => {
-    if (data && japaneseData && pokemonId) {
-      // pokemonData に抽選で選ばれたデータを配列に追加する処理
-      setPokemonData((pokemonData: PokemonData) => [
-        ...pokemonData,
-        {
-          id: data?.id,
-          name: japaneseData?.names[0]?.name,
-          genus: japaneseData?.genera[0]?.genus,
-          height: data?.height,
-          weight: data?.weight,
-          flavorText: japaneseData?.flavor_text_entries[38]?.flavor_text,
-          img: pokeImg,
-        },
-      ]);
-    }
-  }, [data, japaneseData, setPokemonData, pokemonId, pokeImg]);
+  if (data && japaneseData && pokemonId) {
+    // pokemonData に抽選で選ばれたデータを配列に追加する処理
+    setPokemonData((pokemonData: PokemonData) => [
+      ...pokemonData,
+      {
+        id: data?.id,
+        name: japaneseData?.names[0]?.name,
+        genus: japaneseData?.genera[0]?.genus,
+        height: data?.height,
+        weight: data?.weight,
+        flavorText: japaneseData?.flavor_text_entries[38]?.flavor_text,
+        img: pokeImg,
+      },
+    ]);
+  }
+}, [data, japaneseData, setPokemonData, pokemonId, pokeImg]);
 
-  // setFields() を実行
-  useEffect(() => {
-    setFields();
-  }, [setFields]);
+// setFields() を実行
+useEffect(() => {
+  setFields();
+}, [setFields]);
 
-  // localStorage にセット
-  useEffect(() => {
-    if (data && japaneseData && pokemonId) {
-      localStorage.setItem("storageData", JSON.stringify(pokemonData));
-    }
-  }, [pokemonData, data, japaneseData, pokemonId]);
+// localStorage にセット
+useEffect(() => {
+  if (data && japaneseData && pokemonId) {
+    localStorage.setItem("storageData", JSON.stringify(pokemonData));
+  }
+}, [pokemonData, data, japaneseData, pokemonId]);
 ```
 
 localStorage に関しては下記を参考にさせていただきました。
 
-[Local Storageを使ってみる](https://qiita.com/masuda-sankosc/items/cff6131efd6e1b5138e6)
+[Local Storage を使ってみる](https://qiita.com/masuda-sankosc/items/cff6131efd6e1b5138e6)
 
 ## ポケモン図鑑機能
 
-![ポケガチャ (4).png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1686114/95a2c0d9-7fe2-1359-0a89-ba7d9dc70748.png)
+![ポケモン図鑑機能仕様図](./image/pokedexSpecification.png)
 
 ### localStorage に保存したデータを取得して表示
 
@@ -570,63 +569,60 @@ const parsedStorageData: PokemonData = storageData ? JSON.parse(storageData) : [
 
 1. ポケモン図鑑のデータ数によって要素の高さをセット
 
-    `tsx
-    // CrossKey.tsx
+   ```tsx
+   // CrossKey.tsx
+   ...
 
-    ...
+   const [displayHeight, setDisplayHeight] = useState(0);
+   const storageDataLength = useRecoilValue(storageDataLengthState);
 
-    const [displayHeight, setDisplayHeight] = useState(0);
-    const storageDataLength = useRecoilValue(storageDataLengthState);
+   useEffect(() => {
+   // 見出しの高さ + 配列の数 _ 要素一つあたりの高さ - 画面の高さ
+   const calcDisplayHeight = 16 + storageDataLength _ 216 - 240;
+   setDisplayHeight(calcDisplayHeight < 0 ? 0 : calcDisplayHeight);
+   }, [storageDataLength]);
 
-    useEffect(() => {
-        // 見出しの高さ + 配列の数 * 要素一つあたりの高さ - 画面の高さ
-        const calcDisplayHeight = 16 + storageDataLength * 216 - 240;
-        setDisplayHeight(calcDisplayHeight < 0 ? 0 : calcDisplayHeight);
-      }, [storageDataLength]);
-
-    ...
-    `
+   ...
+   ```
 
 2. スクロールアップ、スクロールダウンの機能
 
-    `tsx
-    // CrossKey.tsx
+   ```tsx
+   // CrossKey.tsx
+   ...
 
-    ...
+   const isPokedex = useRecoilValue(isPokedexState);
+   const [scrollY, setScrollY] = useRecoilState(scrollYState);
 
-    const isPokedex = useRecoilValue(isPokedexState);
-    const [scrollY, setScrollY] = useRecoilState(scrollYState);
+   const scrollUp = useCallback(() => {
+   // マイナスの数値になったら 0 をセット
+   if (scrollY - 40 <= 0 || !isPokedex) {
+   setScrollY(0);
+   return;
+   }
+   setScrollY(scrollY - 40);
+   }, [isPokedex, scrollY, setScrollY]);
 
-    const scrollUp = useCallback(() => {
-        // マイナスの数値になったら0をセット
-        if (scrollY - 40 <= 0 || !isPokedex) {
-          setScrollY(0);
-          return;
-        }
-        setScrollY(scrollY - 40);
-      }, [isPokedex, scrollY, setScrollY]);
+   const scrollDown = useCallback(() => {
+   // 要素の高さ以上にならないようにする
+   if (scrollY + 40 >= displayHeight) {
+   setScrollY(displayHeight);
+   return;
+   }
+   setScrollY(scrollY + 40);
+   }, [displayHeight, scrollY, setScrollY]);
 
-      const scrollDown = useCallback(() => {
-        // 要素の高さ以上にならないようにする
-        if (scrollY + 40 >= displayHeight) {
-          setScrollY(displayHeight);
-          return;
-        }
-        setScrollY(scrollY + 40);
-      }, [displayHeight, scrollY, setScrollY]);
+   ...
+   ```
 
-    ...
-    `
+   再度ポケモン図鑑を開いたときに中途半端な位置にスクロールがセットされていないように、ポケモン図鑑画面以外の画面では scrollY に 0 をセットするようにします。
 
-    再度ポケモン図鑑を開いたときに中途半端な位置にスクロールがセットされていないように、ポケモン図鑑画面以外の画面では scrollY に0をセットするようにします。
-
-    また、 scrollY の値がマイナスになったり要素の高さ以上にならないように制御します。（制御できてないと十字キーを押しても動作しないような挙動になってしまう）
+   また、 scrollY の値がマイナスになったり要素の高さ以上にならないように制御します。（制御できてないと十字キーを押しても動作しないような挙動になってしまう）
 
 3. ポケモン図鑑画面で scrollY を受け取ってスクロールする
 
 ```tsx
 // Pokedex.tsx
-
 ...
 
 const ref: LegacyRef<HTMLDivElement> | undefined = useRef(null);
@@ -639,13 +635,12 @@ useEffect(() => {
 
   return (
     <div ref={ref} className="overflow-auto w-auto h-60">
-
 ...
 ```
 
 ## 図鑑データ削除機能
 
-![ポケガチャ (5).png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1686114/d43f2813-4891-8b63-4bc1-3ab9f9430934.png)
+![図鑑データ削除機能仕様図](./image/pokedexDeleteSpecification.png)
 
 localStorage に保存したデータは永久に消えないということで削除機能もしっかり実装しました。
 
@@ -674,13 +669,13 @@ const handlePressA = useCallback(() => {
 
 ```tsx
 <button
-	type="button"
-// アニメーション中またはポケモン図鑑画面ではボタンを無効化する
+  type="button"
+  // アニメーション中またはポケモン図鑑画面ではボタンを無効化する
   disabled={isAnimation || isPokedex}
   onClick={handlePressA}
   className="flex justify-center items-center w-16 h-16 text-2xl text-gray-700 bg-gray-800 rounded-full shadow-sm active:shadow-none shadow-black"
 >
-	A
+  A
 </button>
 ```
 
@@ -688,28 +683,28 @@ const handlePressA = useCallback(() => {
 
 十字キーの左右ボタンに特に機能が割り当てられていなかったのでカラーチェンジ機能をつけました。
 
-![画面収録 2022-02-21 0.45.29.GIF](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/1686114/b58c4063-a7bb-5bcf-e75e-56a8a7fc54d8.gif)
+![カラーチェンジ機能](./image/colorChange.gif)
 
 ```tsx
 // CrossKey.tsx
 
 const colorNumUp = useCallback(() => {
-		// number が3の場合は0にセット
-    if (gameBoyColorNum === 3) {
-      setGameBoyColorNum(0);
-      return;
-    }
-    setGameBoyColorNum(gameBoyColorNum + 1);
-  }, [gameBoyColorNum, setGameBoyColorNum]);
+  // number が3の場合は0にセット
+  if (gameBoyColorNum === 3) {
+    setGameBoyColorNum(0);
+    return;
+  }
+  setGameBoyColorNum(gameBoyColorNum + 1);
+}, [gameBoyColorNum, setGameBoyColorNum]);
 
-  const colorNumDown = useCallback(() => {
-		// number が0の場合は3にセット
-    if (gameBoyColorNum === 0) {
-      setGameBoyColorNum(3);
-      return;
-    }
-    setGameBoyColorNum(gameBoyColorNum - 1);
-  }, [gameBoyColorNum, setGameBoyColorNum]);
+const colorNumDown = useCallback(() => {
+  // number が0の場合は3にセット
+  if (gameBoyColorNum === 0) {
+    setGameBoyColorNum(3);
+    return;
+  }
+  setGameBoyColorNum(gameBoyColorNum - 1);
+}, [gameBoyColorNum, setGameBoyColorNum]);
 ```
 
 ```tsx
