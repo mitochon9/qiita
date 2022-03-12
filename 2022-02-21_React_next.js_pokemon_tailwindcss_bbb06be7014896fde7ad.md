@@ -571,34 +571,34 @@ const parsedStorageData: PokemonData = storageData ? JSON.parse(storageData) : [
 
 2. スクロールアップ、スクロールダウンの機能
 
-   ```tsx
-   // CrossKey.tsx
+```tsx
+// CrossKey.tsx
 
-   const isPokedex = useRecoilValue(isPokedexState);
-   const [scrollY, setScrollY] = useRecoilState(scrollYState);
+const isPokedex = useRecoilValue(isPokedexState);
+const [scrollY, setScrollY] = useRecoilState(scrollYState);
 
-   const scrollUp = useCallback(() => {
-     // マイナスの数値になったら 0 をセット
-     if (scrollY - 40 <= 0 || !isPokedex) {
-       setScrollY(0);
-       return;
-     }
-     setScrollY(scrollY - 40);
-   }, [isPokedex, scrollY, setScrollY]);
+const scrollUp = useCallback(() => {
+  // マイナスの数値になったら 0 をセット
+  if (scrollY - 40 <= 0 || !isPokedex) {
+    setScrollY(0);
+    return;
+  }
+  setScrollY(scrollY - 40);
+}, [isPokedex, scrollY, setScrollY]);
 
-   const scrollDown = useCallback(() => {
-     // 要素の高さ以上にならないようにする
-     if (scrollY + 40 >= displayHeight) {
-       setScrollY(displayHeight);
-       return;
-     }
-     setScrollY(scrollY + 40);
-   }, [displayHeight, scrollY, setScrollY]);
-   ```
+const scrollDown = useCallback(() => {
+  // 要素の高さ以上にならないようにする
+  if (scrollY + 40 >= displayHeight) {
+    setScrollY(displayHeight);
+    return;
+  }
+  setScrollY(scrollY + 40);
+}, [displayHeight, scrollY, setScrollY]);
+```
 
-   再度ポケモン図鑑を開いたときに中途半端な位置にスクロールがセットされていないように、ポケモン図鑑画面以外の画面では scrollY に 0 をセットするようにします。
+再度ポケモン図鑑を開いたときに中途半端な位置にスクロールがセットされていないように、ポケモン図鑑画面以外の画面では scrollY に 0 をセットするようにします。
 
-   また、 scrollY の値がマイナスになったり要素の高さ以上にならないように制御します。（制御できてないと十字キーを押しても動作しないような挙動になってしまう）
+また、 scrollY の値がマイナスになったり要素の高さ以上にならないように制御します。（制御できてないと十字キーを押しても動作しないような挙動になってしまう）
 
 3. ポケモン図鑑画面で scrollY を受け取ってスクロールする
 
